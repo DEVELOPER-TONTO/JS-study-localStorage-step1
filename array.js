@@ -21,6 +21,12 @@ let carding = [
   { id: 2, price: 60000, title: "Black Monastery" },
 ];
 
+let carding2 = [
+  { id: 0, price: 70000, title: "Blossom Dress" },
+  { id: 1, price: 50000, title: "Springfield Shirt" },
+  { id: 2, price: 60000, title: "Black Monastery" },
+];
+
 //함수축약
 function 축약쓰(y) {
   y.forEach(function (i, k) {
@@ -83,8 +89,10 @@ function 축약쓰(y) {
 // });
 
 // 상품명 다나가순 정렬
+let W_count = 0;
 $("#WS").click(function () {
   carding.sort(function (a, b) {
+    W_count+=1;
     if (a.title < b.title) {
       return 1;
     }
@@ -97,6 +105,43 @@ $("#WS").click(function () {
 
   축약쓰(carding);
 });
+
+// 가나다순 정렬
+
+$("#GWS").click(function () {
+  carding2.sort(function(a,b){
+    if(a.title > b.title){
+      return 1;
+    }
+    else {
+      return -1;
+    }
+  });
+  document.querySelector(".row").innerHTML = "";
+
+  축약쓰(carding2);
+});
+
+// 되돌리기
+$("#RE").click(function () {
+  
+  document.querySelector(".row").innerHTML = "";
+
+  축약쓰(card);
+});
+
+//value 가격이하로 정렬
+$("#yee").click(function () {
+  let carder = carding.filter(function (a) {
+    return a.price <= document.querySelector('#yeah').value;
+  });
+
+  document.querySelector(".row").innerHTML = "";
+
+  축약쓰(carder);
+});
+
+
 
 //6만원 이하 상품만 보기
 $("#PRS").click(function () {

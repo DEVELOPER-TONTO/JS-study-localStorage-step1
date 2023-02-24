@@ -1,0 +1,21 @@
+저장하려면 
+localStorage.setItem('이름','kim');
+출력하려면
+localStorage.getItem('이름');
+삭제하려면
+localStorage.removeItem('이름');
+
+배열과 개체저장
+let arr = [1,2,3];
+let newArr = JSON.stringify(arr);
+
+추가 
+push()
+
+
+localStorage.setItem('num', newArr);
+
+-->json에서 다시 배열 개체로 
+JSON.parse()
+
+휘발성이 있는 sessionStorage로 코드를 바꿔도됨

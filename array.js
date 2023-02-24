@@ -10,6 +10,7 @@ function addJavascript(jsname) {
   th.appendChild(s);
 }
 
+
 addJavascript("ar.js");
 
 let array = [7, 4, 5, 6, 3];
@@ -27,6 +28,10 @@ let carding2 = [
   { id: 2, price: 60000, title: "Black Monastery" },
 ];
 
+let go = [];
+
+
+
 //함수축약
 function 축약쓰(y) {
   y.forEach(function (i, k) {
@@ -34,8 +39,23 @@ function 축약쓰(y) {
               <img src="https://via.placeholder.com/600" class="w-100">
             <h5>${y[k].title}</h5>
              <p>가격 : ${y[k].price}</p>
+             <button class="buy">구매</button>
             </div>`;
     $(".row").append(temp);
+  });
+}
+
+//형제요소찾기
+function siblings(t) {
+  var children = t.parentElement.children;
+  var tempArr = [];
+
+  for (var i = 0; i < children.length; i++) {
+    tempArr.push(children[i]);
+  }
+
+  return tempArr.filter(function(e){
+    return e != t;
   });
 }
 
@@ -153,3 +173,54 @@ $("#PRS").click(function () {
 
   축약쓰(carder);
 });
+
+//구매를 눌렀을 때 로컬스토리지에 저장
+//array ver - car.html과 호환
+
+// $('.buy').click(function(e){
+//   let tar = $(e.target).siblings('h5').text();
+//   if(localStorage.getItem('cart') != null){
+//     let zoob = JSON.parse(localStorage.cart);
+//     if(zoob.includes(tar)){ // 중복체크
+//       return alert('응 안돼');
+//     }
+//     else{
+//       zoob.push(tar);
+//       localStorage.setItem('cart', JSON.stringify(zoob));
+//     }
+//     //전전요소찾기
+//     // e.target.previusElementSibling.previusElementSibling
+//   }
+//   else{
+//     localStorage.setItem('cart', JSON.stringify([tar]));
+//     alert('등록완료');
+//   }
+// });
+
+//object ver - count 추가가 안됨
+
+$('.buy').click(function(e){
+  let tar = $(e.target).siblings('h5').text();
+  if(localStorage.getItem('cart') != null){
+    let zoob = JSON.parse(localStorage.cart);
+    let newCart = zoob.filter(function(a){
+      return a.name == tar;
+    });
+    if(zoob.includes(tar)){ // 중복될때
+      zoob.count+=1;
+      //?모름
+      localStorage.setItem('cart', JSON.stringify(zoob));
+    }
+    else if(newCart.length == 0){ // 동일한게 없을 경우
+      zoob.push({name : tar , count : 1});
+      localStorage.setItem('cart', JSON.stringify(zoob));
+    }
+    //전전요소찾기
+    // e.target.previusElementSibling.previusElementSibling
+  }
+  else{
+    localStorage.setItem('cart', JSON.stringify([{name : tar , count : 1}]));
+    alert('등록완료');
+  }
+});
+

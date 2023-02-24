@@ -30,6 +30,7 @@ card.forEach(function (a, k) {
     <img src="https://via.placeholder.com/600" class="w-100">
     <h5>${card[k].title}</h5>
     <p>가격 : ${card[k].price}</p>
+    <button class="buy">구매</button>
   </div>`;
   $(".row").append(temPlate);
 });
@@ -49,6 +50,7 @@ document.querySelector("#more").addEventListener("click", function () {
             <img src="https://via.placeholder.com/600" class="w-100">
             <h5>${data[i].title}</h5>
             <p>가격 : ${data[i].price}</p>
+            <button class="buy">구매</button>
           </div>`;
         $(".row").append(temPlate);
       }
@@ -62,6 +64,7 @@ document.querySelector("#more").addEventListener("click", function () {
         <img src="https://via.placeholder.com/600" class="w-100">
         <h5>${data[i].title}</h5>
         <p>가격 : ${data[i].price}</p>
+        <button class="buy">구매</button>
       </div>`);
         document.querySelector("#more").style.display = "none";
       }
